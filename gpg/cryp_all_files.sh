@@ -1,19 +1,24 @@
-for file in $1/*
-do 
-  
-  parts=$(echo $file | tr "/" "\n")
+#echo "write directory >>>"
 
-	for addr in $parts
-	do
-   	name=$addr
-done
+function directory_search 
+ {
+ dir=$1
+ output_dir=$2
+ for file in `find $dir`
+  do
+  if [ -d "$file" ]
+    then
+	mkdir -v $output_dir/$file 
+    else
+  	echo "processing $file"
+  	./cryp.sh $file $output_dir/$file 
+  fi
 
-#  if [ -a "$1/$name" ]
-#  then 
-#	echo "$file already exist"
-#  else  
-	echo "processing $file"	
-	gpg -c $file &
+  done
+ }
 
-#fi
-done
+dir=$1
+output_dir=$2
+
+mkdir -v $output_dir
+directory_search $dir $output_dir
