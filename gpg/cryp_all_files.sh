@@ -11,7 +11,7 @@ function directory_search
 	mkdir -v $output_dir/$file 
     else
   	echo "processing $file"
-  	./cryp.sh $file $output_dir/$file 
+  	./encryp.sh $file $output_dir/$file 
   fi
 
   done
