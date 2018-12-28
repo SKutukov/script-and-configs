@@ -158,3 +158,5 @@ bar {
 		
 status_command i3blocks
 }
+# config i3lock
+bindsym $mod+Shift+x  exec i3lock
