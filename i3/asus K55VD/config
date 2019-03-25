@@ -222,3 +222,7 @@ exec "feh --bg-scale  /home/skutukov/Pictures/nHjhXTp-space-desktop-backgrounds-
 exec thunderbird
 exec_always compton -f
 
+exec "sh layout.sh" 
+# Screen Shots
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Control+P exec gnome-screenshot -i
