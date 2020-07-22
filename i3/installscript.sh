@@ -33,6 +33,8 @@ options=(
 	 16 "arc-theme" off
 	 17 "tmux" off
 	 18 "nvtop" off
+	 19 "plank" off
+         20 "vlc" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -141,6 +143,14 @@ do
             make
             sudo make install
 	    cd - 
+            ;;
+	19)
+            echo "plank"
+	    sudo apt-get install plank
+            ;;
+	20)
+            echo "vlc"
+	    sudo snap install vlc
             ;;
         
         
