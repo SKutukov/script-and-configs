@@ -35,6 +35,9 @@ options=(
 	 18 "nvtop" off
 	 19 "plank" off
          20 "vlc" off
+         20 "pycharm commynity" off
+         21 "cuda 10.1" off
+         22 "init i3 config" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -134,7 +137,7 @@ do
             ;;
 	18)
             echo "nvtop"
-	    sudo apt install cmake libncurses5-dev libncursesw5-dev git
+	    sudo apt install cmake libncurses5-dev libncursesw5-dev git -y
             mkdir ~/opt
 	    cd ~/opt
             git clone https://github.com/Syllo/nvtop.git
@@ -153,8 +156,28 @@ do
 	    sudo snap install vlc
             ;;
         
-        
-   
+       19)
+            echo "PyCharm community"
+            sudo snap install pycharm-community --classic
+            ;;
+       20)
+            echo "cuda 10.1"
+            wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+            sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+            wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+            sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+            sudo apt-key add /var/cuda-repo-10-1-local-10.1.243-418.87.00/7fa2af80.pub
+            sudo apt-get update
+            sudo apt-get -y install cuda
+            ;;
+       21)
+            echo "intit config"
+	    mkdir ~/opt
+	    cd ~/opt            
+            git clone https://github.com/SKutukov/script-and-configs
+            cp ./script-and-configs/i3/PC/*  ~/.config/i3/ 
+	    cd - 
+            ;;
     esac
 done
 
