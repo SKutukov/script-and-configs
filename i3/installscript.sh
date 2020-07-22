@@ -3,7 +3,7 @@
 ## Define some variables to make it less typing
 update='apt update'
 user=$USER
-
+sudo apt-get install -y dialog 
 
 
 
@@ -35,9 +35,10 @@ options=(
 	 18 "nvtop" off
 	 19 "plank" off
          20 "vlc" off
-         20 "pycharm commynity" off
-         21 "cuda 10.1" off
-         22 "init i3 config" off
+         21 "pycharm commynity" off
+         22 "cuda 10.1" off
+         23 "init i3 config" off
+         24 "slack" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -156,11 +157,11 @@ do
 	    sudo snap install vlc
             ;;
         
-       19)
+       21)
             echo "PyCharm community"
             sudo snap install pycharm-community --classic
             ;;
-       20)
+       22)
             echo "cuda 10.1"
             wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
             sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -170,13 +171,17 @@ do
             sudo apt-get update
             sudo apt-get -y install cuda
             ;;
-       21)
-            echo "intit config"
+       23)
+            echo "init config"
 	    mkdir ~/opt
 	    cd ~/opt            
             git clone https://github.com/SKutukov/script-and-configs
             cp ./script-and-configs/i3/PC/*  ~/.config/i3/ 
 	    cd - 
+            ;;
+	24)
+            echo "slack"
+	    sudo snap install slack --classic
             ;;
     esac
 done
