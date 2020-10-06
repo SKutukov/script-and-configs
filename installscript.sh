@@ -12,7 +12,7 @@ sudo apt-get install -y dialog
 	$update
 
 	#$install dialog 
-	cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
+	cmd=(dialog --separate-output --checklist "Select options:" 25 76 16)
 options=(
 	 0 "snapd" on
 	 1 "PyCharm Pro" off    # any option can be set to default to "on"
@@ -39,6 +39,7 @@ options=(
          22 "cuda 10.1" off
          23 "init i3 config" off
          24 "slack" off
+         25 "bleachbit" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -182,6 +183,10 @@ do
 	24)
             echo "slack"
 	    sudo snap install slack --classic
+            ;;
+	25)
+            echo "bleachbit"
+	    sudo apt install bleachbit
             ;;
     esac
 done
