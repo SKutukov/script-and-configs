@@ -12,34 +12,35 @@ sudo apt-get install -y dialog
 	$update
 
 	#$install dialog 
-	cmd=(dialog --separate-output --checklist "Select options:" 25 76 16)
+	cmd=(dialog --separate-output --checklist "Select options:" 26 76 16)
 options=(
-	 0 "snapd" on
-	 1 "PyCharm Pro" off    # any option can be set to default to "on"
-         2 "git" off
-	 3 "vscode" off
-	 4 "i3-wm" off
-         5 "tex full" off
-         6 "telegram" off
-	 7 "anaconda" off
-	 8 "rofi" off
-	 9 "compton" off
-	 10 "py3status" off
-	 11 "moka+faba theme" off 
-	 12 "i3lock-fancy" off
-	 13 "feh" off
-	 14 "thunar" off
-	 15 "lxappearance" off
-	 16 "arc-theme" off
-	 17 "tmux" off
-	 18 "nvtop" off
-	 19 "plank" off
-         20 "vlc" off
-         21 "pycharm commynity" off
-         22 "cuda 10.1" off
-         23 "init i3 config" off
-         24 "slack" off
-         25 "bleachbit" off
+	0 "snapd" on
+	1 "PyCharm Pro" off    # any option can be set to default to "on"
+     2 "git" off
+	3 "vscode" off
+	4 "i3-wm" off
+     5 "tex full" off
+     6 "telegram" off
+	7 "anaconda" off
+	8 "rofi" off
+	9 "compton" off
+	10 "py3status" off
+	11 "moka+faba theme" off 
+	12 "i3lock-fancy" off
+	13 "feh" off
+	14 "thunar" off
+	15 "lxappearance" off
+	16 "arc-theme" off
+	17 "tmux" off
+	18 "nvtop" off
+	19 "plank" off
+     20 "vlc" off
+     21 "pycharm commynity" off
+     22 "cuda 10.1" off
+     23 "init i3 config" off
+     24 "slack" off
+     25 "bleachbit" off
+     26 "ncdu" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -186,7 +187,11 @@ do
             ;;
 	25)
             echo "bleachbit"
-	    sudo apt install bleachbit
+	    sudo apt install -y bleachbit
+            ;;
+     25)
+         echo "ncdu"
+	    sudo apt-get install -y ncdu
             ;;
     esac
 done
