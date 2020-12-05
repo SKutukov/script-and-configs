@@ -91,15 +91,15 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1: Firefox"
-set $workspace2 2
+set $workspace2 "2: IDE"
 set $workspace3 3
-set $workspace4 4
+set $workspace4 "4: zoom"
 set $workspace5 5
 set $workspace6 6
-set $workspace7 "7: IDE"
-set $workspace8 8
+set $workspace7 7
+set $workspace8 "8: Slack"
 set $workspace9 "9: Telegram"
-set $workspace10 "10: Mail"
+set $workspace10 10
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -127,27 +127,30 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 set $monitor1 DP-2
 set $monitor2 DP-4
-set $monitor3 HDMI-0
+set $monitor3 DP-4
 
 # workspace default monitors
 workspace $workspace1 output $monitor1
 workspace $workspace2 output $monitor2
 workspace $workspace3 output $monitor1
-workspace $workspace4 output $monitor1
+workspace $workspace4 output $monitor2
 workspace $workspace5 output $monitor1
-workspace $workspace6 output $monitor1
+workspace $workspace6 output $monitor2
 workspace $workspace7 output $monitor2
 workspace $workspace8 output $monitor1
-workspace $workspace9 output $monitor3
+workspace $workspace9 output $monitor1
 workspace $workspace10 output $monitor2
 
 
 #assing aplication to workspace
-assign [class="Thunderbird"] $workspace10
+#assign [class="Thunderbird"] $workspace10
 assign [class="TelegramDesktop"] $workspace9
-#assign [class="Firefox"] $workspace1
-assign [class="jetbrains-pycharm-ce"] $workspace7
+assign [class="Firefox"] $workspace1
+assign [class="jetbrains-pycharm-ce"] $workspace2
+assign [class="Slack"] $workspace8
 assign [class="Anydesk"] $workspace6
+assign [class="Code"] $workspace2
+assign [class="zoom"] $workspace4
 
 
 # reload the configuration file
@@ -208,13 +211,13 @@ bar {
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 	}	
-#	position top
+	#position top
 }
 
 #bar {
 #       status_command i3status
 #}
-exec_always --no-startup-id xfce4-panel --disable-wm-check
+#exec_always --no-startup-id xfce4-panel --disable-wm-check
 
 #i3lock-fancy configiration
 bindsym $mod+x exec i3lock-fancy
@@ -224,18 +227,32 @@ bindsym $mod+x exec i3lock-fancy
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym $mod+p exec "systemctl hibernate"
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -opacity 90 -bw 0 -bc "$bg-color" -bg "$bg-color" -fc "$text-color" -hlbg "$bg-color" -hlfg "#9575cd"
-exec_always "feh --bg-scale /home/skutukov/Disk/wal.jpg"
+bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 50 -padding 50 -opacity 30 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+
+exec_always "feh --bg-scale /home/skutukov/Pictures/Wallpapers/715146.jpg"
 exec_always compton -f
 exec_always "sh ~/.config/i3/layout.sh" 
+exec_always "sh ~/.config/polybar/launch.sh"
+exec_always "sh ~/.config/i3/lock.sh"
 # Screen Shots
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
 bindsym Control+P exec gnome-screenshot -i
-exec_always  dropbox start -i
+#exec_always  dropbox start -i
 exec_always  nm-applet
-exec_always yandex-disk start
+exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id kdeconnect-indicator
+#exec_always yandex-disk start
 
 # floating mode
 for_window [class="Python*"] floating enable
+for_window [class="Yad" title="yad-calendar"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+
+# work window
+for_window [class="labeling.py"] floating enable
+for_window [class="labeling"] floating enable
+
