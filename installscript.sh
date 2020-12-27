@@ -99,7 +99,7 @@ do
             ;;
 	11)
             echo "moka + faba"
-            sudo add-apt-repository -u ppa:snwh/ppa
+	    sudo sudo add-apt-repository ppa:snwh/ppa
 	    sudo apt-get update
 	    sudo apt-get install moka-icon-theme faba-icon-theme faba-mono-icons -y
 	     
