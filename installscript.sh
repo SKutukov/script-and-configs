@@ -41,6 +41,7 @@ options=(
      24 "slack" off
      25 "bleachbit" off
      26 "ncdu" off
+     27 "brightness" off
 
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -193,6 +194,17 @@ do
      26)
          echo "ncdu"
 	    sudo apt-get install -y ncdu
+            ;;
+     27)
+         echo "brightness"
+         mkdir -p ~/opt
+         cd ~/opt
+         git clone https://github.com/multiplexd/brightlight.git
+         cd brightlight
+         make
+         sudo chown root ./brightlight
+         sudo chmod u+s ./brightlight
+         sudo mv ./brightlight /usr/local/bin
             ;;
     esac
 done
