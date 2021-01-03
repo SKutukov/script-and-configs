@@ -58,8 +58,8 @@ font-3 = FreeMono:size=10;4
 
 
 modules-left = i3
-modules-center = filesystem-hdd filesystem
-modules-right =  pulseaudio memory cpu wlan temperature popup-calendar bluetooth
+modules-center = filesystem-hdd filesystem memory
+modules-right =  pulseaudio  cpu wlan temperature popup-calendar bluetooth popup-hibernate popup-suspend popup-poweroff
 
 tray-position = right
 tray-padding = 2
@@ -186,17 +186,32 @@ label = MEM USAGE %percentage_used%%
 
 [module/popup-calendar]
 type = custom/script
-exec = ~/.config/polybar-scripts/popup-calendar.sh
+exec = ~/.config/polybar/popup-calendar.sh
 interval = 5
-click-left = ~/.config/polybar-scripts/popup-calendar.sh --popup &
-click-right = ~/.config/polybar-scripts/popup-calendar.sh --close &
+click-left = ~/.config/polybar/popup-calendar.sh --popup &
+click-right = ~/.config/polybar/popup-calendar.sh --close &
+
+[module/popup-hibernate]
+type = custom/script
+exec = echo "%{F#2193ff}☾HIB"
+click-left = ~/.config/polybar/hibernate.sh &
+
+[module/popup-suspend]
+type = custom/script
+exec = echo "%{F#ffff00}☾SUS"
+click-left = ~/.config/polybar/suspend.sh &
+
+[module/popup-poweroff]
+type = custom/script
+exec = echo "%{F#ff0000}☾POW"
+click-left = ~/.config/polybar/poweroff.sh &
 
 [module/bluetooth]
 type = custom/script
-exec = ~/.config/polybar-scripts/polybar-bluetooth/bluetooth.sh
+exec = ~/.config/polybar/polybar-bluetooth/bluetooth.sh
 interval = 2
 click-left = exec blueman-manager
-;click-right = exec ~/.config/polybar-scripts/polybar-bluetooth/config/polybar/toggle_bluetooth.sh
+;click-right = exec ~/.config/polybar/polybar-bluetooth/config/polybar/toggle_bluetooth.sh &
 ;format-padding = 1
 ;format-background = #000000
 ;format-foreground = #ffffff
@@ -228,6 +243,12 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+;[module/sakh]
+;type = custom/script
+;exec = python3 ~/.config/i3/python_scripts/sakhcom_updater.py
+;interval = 2
+;click-left = exec blueman-manager
 
 [module/temperature]
 type = internal/temperature
