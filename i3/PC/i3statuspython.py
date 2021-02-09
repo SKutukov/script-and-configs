@@ -12,19 +12,19 @@ status.modules.append(CurrencyStatus())
 #     format="%a %-d %b %X KW%V",)
 
 # Shows your CPU temperature, if you have a Intel CPU
-status.register("temp",
-    format="{temp:.0f}°C",)
+#status.register("temp",
+#   format="{temp:.0f}°C",)
 
 # Shows disk usage of /
 # Format:
 # 42/128G [86G]
-status.register("disk",
-    path="/",
-    format="{used}/{total}G [{avail}G]",)
+#status.register("disk",
+#    path="/",
+#    format="{used}/{total}G [{avail}G]",)
 
-status.register("disk",
-    path="//media/skutukov/6458f349-7219-47a6-9fb7-6bfe5cf4fa63/",
-    format="{used}/{total}G [{avail}G]",)
+#status.register("disk",
+#    path="/HDD/",
+#    format="{used}/{total}G [{avail}G]",)
 
 
 # Shows pulseaudio default sink volume

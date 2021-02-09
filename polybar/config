@@ -25,12 +25,12 @@ foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
-alert = #bd2c40
+alert = #bd2c40 
 
 [bar/example]
 monitor = ${env:MONITOR:DP-4}
 width = 100%
-height = 27
+height = 30
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -42,7 +42,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 1
 border-color = #00000000
 
 padding-left = 0
@@ -51,15 +51,15 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=20;1
+font-0 = fixed:pixelsize=23;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Symbola:pixelsize=25;1
 font-3 = FreeMono:size=10;4
 
 
-modules-left = i3
-modules-center = filesystem-hdd filesystem memory
-modules-right =  pulseaudio  cpu wlan temperature popup-calendar bluetooth popup-hibernate popup-suspend popup-poweroff
+modules-left =  memory cpu temperature nvidia-0 nvidia-1
+modules-center = filesystem-hdd filesystem 
+modules-right =  pulseaudio   wlan  bluetooth popup-hibernate popup-suspend popup-reboot popup-poweroff popup-calendar
 
 tray-position = right
 tray-padding = 2
@@ -102,12 +102,12 @@ label-indicator-underline = ${colors.secondary}
 [module/filesystem]
 type = internal/fs
 interval = 25
-
 mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+mount-1 = /HDD
+label-mounted = %{F#ff0000}%used%%{F-}/%{F#0a81f5}%total%%{F-} [%{F#008100}%free%%{F-}]
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
 
 [module/wlan]
 type = internal/network
@@ -181,7 +181,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-underline = #ff0000
 label = MEM USAGE %percentage_used%%
 
 [module/popup-calendar]
@@ -205,6 +205,11 @@ click-left = ~/.config/polybar/suspend.sh &
 type = custom/script
 exec = echo "%{F#ff0000}☾POW"
 click-left = ~/.config/polybar/poweroff.sh &
+
+[module/popup-reboot]
+type = custom/script
+exec = echo "%{F#00ff00}☾REB"
+click-left = ~/.config/polybar/reboot.sh &
 
 [module/bluetooth]
 type = custom/script
@@ -243,6 +248,23 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/currency]
+type = custom/script
+exec = python3 ~/personal_project/pystatus_modules/bin/get_status.py
+interval = 60
+
+[module/nvidia-0]
+type = custom/script
+exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits -i 0 
+label = %{u#ff9900}%{+u} 1050ti %output% %
+interval = 20
+
+[module/nvidia-1]
+type = custom/script
+label = %{u#ff9900}%{+u} 20800ti %output% %
+exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits -i 1
+interval = 20
 
 ;[module/sakh]
 ;type = custom/script
