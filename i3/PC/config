@@ -151,6 +151,7 @@ assign [class="Slack"] $workspace8
 assign [class="Anydesk"] $workspace6
 assign [class="Code"] $workspace2
 assign [class="zoom"] $workspace4
+assign [class="processing-app-Base"] $workspace2
 
 
 # reload the configuration file
@@ -201,18 +202,18 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command python3 ~/.config/i3/i3statuspython.py
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}	
-	#position top
-}
+# bar {
+ #        status_command python3 ~/.config/i3/i3statuspython.py
+# 	colors {
+# 		background $bg-color
+# 	    	separator #757575
+# 		#                  border             background         text
+# 		focused_workspace  $bg-color          $bg-color          $text-color
+# 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+# 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+# 	}	
+# # 	#position top
+# }
 
 #bar {
 #       status_command i3status
@@ -231,7 +232,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 50 -padding 50 -opacity 30 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 
-exec_always "feh --bg-scale /home/skutukov/Pictures/Wallpapers/715146.jpg"
+exec_always --no-startup-id feh  --randomize --bg-fill ~/.config/i3/wallpapers
 exec_always compton -f
 exec_always "sh ~/.config/i3/layout.sh" 
 exec_always "sh ~/.config/polybar/launch.sh"
@@ -243,7 +244,6 @@ bindsym $mod+P exec gnome-screenshot -i
 exec_always  nm-applet
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id kdeconnect-indicator
-exec yandex-disk start --exclude-dirs=Загрузки,work,work_utkonos,speed_up_test_scaled,bio,mag_work,mxnet_models,SPBU,Languages,PASCAL_VOC_MNIST,barchela_work,annotation/0_cropped,annotation/1_waiting,annotation/2_on_annotation,annotation/3_on_check,annotation/full_videos
 
 # floating mode
 for_window [class="Python*"] floating enable
