@@ -225,9 +225,9 @@ bindsym $mod+x exec i3lock-fancy
 
 # volume control
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master 0% # mute sound
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 50 -padding 50 -opacity 30 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
@@ -244,6 +244,7 @@ bindsym $mod+P exec gnome-screenshot -i
 exec_always  nm-applet
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id kdeconnect-indicator
+exec yandex-disk start --exclude-dirs=Загрузки,work,work_utkonos,speed_up_test_scaled,bio,mag_work,mxnet_models,SPBU,Languages,PASCAL_VOC_MNIST,barchela_work,annotation/0_cropped,annotation/1_waiting,annotation/2_on_annotation,annotation/3_on_check,annotation/4_annotated/pool/in_set,annotation/4_annotated/pool/to_convert,annotation/full_videos
 
 # floating mode
 for_window [class="Python*"] floating enable
