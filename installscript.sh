@@ -12,7 +12,7 @@ sudo apt-get install -y dialog
 	$update
 
 	#$install dialog 
-	cmd=(dialog --separate-output --checklist "Select options:" 26 76 16)
+	cmd=(dialog --separate-output --checklist "Select options:" 29 76 16)
 options=(
 	0 "snapd" on
 	1 "PyCharm Pro" off    # any option can be set to default to "on"
@@ -42,7 +42,8 @@ options=(
      25 "bleachbit" off
      26 "ncdu" off
      27 "brightness" off
-
+     28 "dropbox" off
+     29 "ranger" off
 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -205,6 +206,19 @@ do
          sudo chown root ./brightlight
          sudo chmod u+s ./brightlight
          sudo mv ./brightlight /usr/local/bin
+            ;;
+     28)
+         echo "dropbox"
+         echo "deb [arch=i386,amd64] http://linux.dropbox.com/ubuntu disco main" > /etc/apt/sources.list.d/dropbox.list
+         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
+         sudo apt update
+         sudo apt install -y python3-gi python3-gpg dropbox
+         dropbox start -i
+         dropbox autostart y
+            ;;
+     29)
+         echo "ranger"
+	    sudo apt install -y ranger
             ;;
     esac
 done
